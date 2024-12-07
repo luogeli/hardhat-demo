@@ -13,7 +13,7 @@ contract FundMe {
     // 投资人和投资金额mapping
     mapping(address => uint256) public funderToAmount;
     // 最小值 wei, 使用常量定义 USD = 0.05 USD
-    uint256 constant MINIMUN_VALUE = 0.5 *  10 ** 18;
+    uint256 constant MINIMUN_VALUE = 0.0000001 *  10 ** 18;
     // 预言机dataFeed转换
     AggregatorV3Interface internal dataFeed;
     // 准备收集的目标值
@@ -64,7 +64,6 @@ contract FundMe {
         require(block.timestamp < deploymentTimestamp + lockTime, "window is closed!");
         // 赋值投资人的投资金额
         funderToAmount[msg.sender] = msg.value;
-
     }
 
     /**
@@ -95,6 +94,9 @@ contract FundMe {
         return ethAmount * ethPrice / (10 ** 8);
     }
 
+    /**
+     * 所有权转移
+     */
     function transferOwnership(address newOwner) public onlyOwner {
         owner = newOwner;
     }
