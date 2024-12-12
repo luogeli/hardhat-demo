@@ -151,13 +151,15 @@ contract FundMe is ReentrancyGuard {
         bool success;
         (success, ) = payable(msg.sender).call{value: amount} ("");
         require(success, "transfer tx failed");
-
     }
 
+    /**
+     * 设置ERC20合约地址
+     */
     function setErc20Addr(address _erc20Addr) public onlyOwner {
         erc20Addr = _erc20Addr;
     }
-
+    
     function setFunderToAmount(address funder, uint256 amountToUpdate) external {
         require(msg.sender == erc20Addr, "you do not have premission to call this function");
         funderToAmount[funder] = amountToUpdate;
