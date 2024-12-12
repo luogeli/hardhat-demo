@@ -2,6 +2,7 @@
 // 2. create main function
 // 3. execute main function
 
+// const { ethers} = require("ethers");
 // 线上
 // 连接到网络（例如，本地 Hardhat 网络或 Infura/Alchemy）
 // const provider = new ethers.JsonRpcProvider(process.env.ALCHEMY_SEPOLIA_URL);

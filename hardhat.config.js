@@ -9,6 +9,7 @@ require("@nomicfoundation/hardhat-verify");
 require("./tasks/deploy-fundme")
 // 使用index.js 自动找tasks下面的index.js
 require("./tasks")
+require("hardhat-deploy")
 
 const INFURA_SEPOLIA_URL= process.env.SEPOLIA_URL;
 const QUICKNODE_SEPOLIA_URL = process.env.QUICKNODE_SEPOLIA_URL;
@@ -24,6 +25,7 @@ setGlobalDispatcher(proxyAgent);
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.27",
+  defaultNetwork: "hardhat",
   networks: {
     sepolia: {
       // url: Alchemy, Infura, QuickNode, 这里使用的是Alchemy
@@ -43,6 +45,14 @@ module.exports = {
   }
   ,sourcify: {
     enabled: false
+  },
+  namedAccounts: {
+    firstAccount: {
+      default: 0
+    },
+    secondAccount: {
+      default: 1
+    }
   }
 
 };
