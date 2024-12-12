@@ -75,7 +75,6 @@ describe("test fundme contract", async function() {
                 console.log(`log: event name is ${log.fragment.name}, index is ${index}, sender is ${log.args._sender}, value is ${log.args._value}`);
             });
 
-
             // make sure the window is closed
             await helpers.time.increase(HELPERS_TIME_INCREASE);
             await helpers.mine();
