@@ -18,6 +18,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 
+// 不加这个会connect time out
 const { ProxyAgent, setGlobalDispatcher } = require("undici");
 const proxyAgent = new ProxyAgent("http://127.0.0.1:7890");
 setGlobalDispatcher(proxyAgent);
