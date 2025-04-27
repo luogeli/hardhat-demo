@@ -22,5 +22,5 @@ module.exports = async({getNamedAccounts, deployments}) => {
 
 }
 
-// npx hardhat deploy --tags fundme/all
+// npx hardhat deploy --tags mock/all
 module.exports.tags = ["mock" ,"all"]

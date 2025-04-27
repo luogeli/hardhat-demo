@@ -58,7 +58,7 @@ async function main() {
     const firstAccountBalanceInFundMe = await fundMe.funderToAmount(firstAccount.address);
     const secondAccountBalanceInFundMe = await fundMe.funderToAmount(secondAccount.address);
     console.log(`Balance of first account is ${firstAccount.address} is ${firstAccountBalanceInFundMe}`);
-    console.log(`Balance of first account is ${secondAccount.address} is ${secondAccountBalanceInFundMe}`);
+    console.log(`Balance of second account is ${secondAccount.address} is ${secondAccountBalanceInFundMe}`);
 }
 
 /**

@@ -20,7 +20,7 @@ contract FundMe is ReentrancyGuard {
     // 预言机dataFeed转换
     AggregatorV3Interface public dataFeed;
     // 准备收集的目标值
-    uint256 constant TARGET = 10 * 10 ** 18;
+    uint256 constant TARGET = 0.000001 * 10 ** 18;
 
     address public owner;
     // 合约部署的时间点
@@ -47,7 +47,7 @@ contract FundMe is ReentrancyGuard {
      * 装饰器: 判断资金是否大于最小值，如果不大于最小值，则返回异常信息提示
      */
     modifier requireMinAmount() {
-        require(convertEthToUsd(msg.value) >= MINIMUN_VALUE, "Sned more ETH");
+        require(convertEthToUsd(msg.value) >= MINIMUN_VALUE, "Send more ETH");
         _;
     }
 
@@ -127,10 +127,13 @@ contract FundMe is ReentrancyGuard {
         // call: transfer ETH with data return value of function
         // payable(msg.sender).call({value : address(this).balance});
         bool success;
-        (success , ) = payable(msg.sender).call{value : address(this).balance}("");
+        uint256 balance = address(this).balance;
+        (success , ) = payable(msg.sender).call{value : balance}("");
         require(success, "transfer tx failed");
         // 如果已经getFund，给flag设置为true
         getFundSuccess = true;
+        // emit event log
+        emit FundWithDrawByOwner(balance);
     }
 
     /**
@@ -159,7 +162,7 @@ contract FundMe is ReentrancyGuard {
     function setErc20Addr(address _erc20Addr) public onlyOwner {
         erc20Addr = _erc20Addr;
     }
-    
+
     function setFunderToAmount(address funder, uint256 amountToUpdate) external {
         require(msg.sender == erc20Addr, "you do not have premission to call this function");
         funderToAmount[funder] = amountToUpdate;
@@ -167,4 +170,6 @@ contract FundMe is ReentrancyGuard {
 
 
     event PrintLog(address indexed _sender, uint256 _value);
+
+    event FundWithDrawByOwner(uint256);
 }
